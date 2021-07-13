@@ -8,8 +8,8 @@ import images from "./gallery-items.js"
 const refs = {
   gallery: document.querySelector(".js-gallery"),
   modalImg: document.querySelector(".lightbox__image"),
-  modalLightBox: document.querySelector("div.lightbox"),
-  modalCloseBtn: document.querySelector(".lightbox__button"),
+  modalLightBox: document.querySelector(".js-lightbox"),
+  modalCloseBtn: document.querySelector(' button[data-action="close-lightbox"]'),
 }
 
 function createMarkup({ preview, original, description }) {
@@ -37,6 +37,8 @@ refs.gallery.insertAdjacentHTML("beforeend", imageEls)
 refs.gallery.addEventListener("click", onImgClick)
 
 function onImgClick(evt) {
+  evt.preventDefault()
+
   if (!evt.target.classList.contains("gallery__image")) {
     return
   }
