@@ -8,7 +8,7 @@ import images from "./gallery-items.js"
 const refs = {
   gallery: document.querySelector(".js-gallery"),
   modalImg: document.querySelector(".lightbox__image"),
-  modalLightbox: document.querySelector(".js-lightbox"),
+  modalLightBox: document.querySelector("div.lightbox"),
   modalCloseBtn: document.querySelector(".lightbox__button"),
 }
 
@@ -41,14 +41,16 @@ function onImgClick(evt) {
     return
   }
 
-  refs.modalLightbox.classList.add("is-open")
+  refs.modalLightBox.classList.add("is-open")
 
   refs.modalImg.src = evt.target.dataset.source
 }
 
+//step3
+
 refs.modalCloseBtn.addEventListener("click", onCloseBtn)
 
 function onCloseBtn(evt) {
-  refs.modalLightbox.classList.remove("is-open")
+  refs.modalLightBox.classList.remove("is-open")
   evt.target.dataset.source = ""
 }
