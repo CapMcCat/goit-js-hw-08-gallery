@@ -54,5 +54,5 @@ refs.modalCloseBtn.addEventListener("click", onCloseBtn)
 
 function onCloseBtn(evt) {
   refs.modalLightBox.classList.remove("is-open")
-  evt.target.dataset.source = ""
+  refs.modalImg.src = ""
 }
