@@ -7,7 +7,9 @@ import images from "./gallery-items.js"
 
 const refs = {
   gallery: document.querySelector(".js-gallery"),
-  modalImg: document.querySelector("lightbox__image"),
+  modalImg: document.querySelector(".lightbox__image"),
+  modalLightbox: document.querySelector(".js-lightbox"),
+  modalCloseBtn: document.querySelector(' button[data-action="close-lightbox"]'),
 }
 
 function createMarkup({ preview, original, description }) {
@@ -20,6 +22,23 @@ function createMarkup({ preview, original, description }) {
 
 const imageEls = images.map(createMarkup).join("")
 
-refs.gallery.insertAdjacentHTML("afterbegin", imageEls)
+refs.gallery.insertAdjacentHTML("beforeend", imageEls)
 
 refs.gallery.addEventListener("click", onImgClick)
+
+function onImgClick(evt) {
+  if (!evt.target.classList.contains("gallery__image")) {
+    return
+  }
+
+  refs.modalLightbox.add("is-open")
+
+  refs.modalImg.src = evt.target.dataset.source
+}
+
+refs.modalCloseBtn.addEventListener("click", onCloseBtn)
+
+function onCloseBtn(evt) {
+  modalLightbox.classList.remove("is-open")
+  evt.target.dataset.source = ""
+}
