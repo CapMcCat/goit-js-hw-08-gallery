@@ -9,20 +9,30 @@ const refs = {
   gallery: document.querySelector(".js-gallery"),
   modalImg: document.querySelector(".lightbox__image"),
   modalLightbox: document.querySelector(".js-lightbox"),
-  modalCloseBtn: document.querySelector(' button[data-action="close-lightbox"]'),
+  modalCloseBtn: document.querySelector(".lightbox__button"),
 }
 
 function createMarkup({ preview, original, description }) {
   return `<li class="gallery__item">
-      <a class="gallery__link" href="${original}"  >
-      <img class="gallery__image" src="${preview}" alt="${description}" data-source="${original}" >
-      </a>
-      </li>`
+  <a
+    class="gallery__link"
+    href="${original}"
+  >
+    <img
+      class="gallery__image"
+      src="${preview}"
+      data-source="${original}"
+      alt="${description}"
+    />
+  </a>
+</li>`
 }
 
 const imageEls = images.map(createMarkup).join("")
 
 refs.gallery.insertAdjacentHTML("beforeend", imageEls)
+
+//step2
 
 refs.gallery.addEventListener("click", onImgClick)
 
@@ -31,7 +41,7 @@ function onImgClick(evt) {
     return
   }
 
-  refs.modalLightbox.add("is-open")
+  refs.modalLightbox.classList.add("is-open")
 
   refs.modalImg.src = evt.target.dataset.source
 }
@@ -39,6 +49,6 @@ function onImgClick(evt) {
 refs.modalCloseBtn.addEventListener("click", onCloseBtn)
 
 function onCloseBtn(evt) {
-  modalLightbox.classList.remove("is-open")
+  refs.modalLightbox.classList.remove("is-open")
   evt.target.dataset.source = ""
 }
